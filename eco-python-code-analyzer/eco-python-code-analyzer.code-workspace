@@ -1,0 +1,33 @@
+{
+    "folders": [
+        {
+            "path": "."
+        }
+    ],
+    "settings": {
+        "typescript.tsc.autoDetect": "off",
+        "debug.allowBreakpointsEverywhere": true
+    },
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [
+            {
+                "name": "Extension",
+                "type": "extensionHost",
+                "request": "launch",
+                "args": [
+                    "--extensionDevelopmentPath=${workspaceFolder}"
+                ],
+                "outFiles": [
+                    "${workspaceFolder}/dist/**/*.js"
+                ],
+                "preLaunchTask": "npm: compile",
+                "trace": true,
+                "internalConsoleOptions": "openOnSessionStart",
+                "env": {
+                    "VSCODE_DEBUG_MODE": "true"
+                }
+            }
+        ]
+    }
+}

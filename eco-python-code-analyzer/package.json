@@ -1,0 +1,81 @@
+{
+  "name": "eco-python-code-analyzer",
+  "displayName": "eco-python-code-analyzer",
+  "description": "Analyze Python code for ecological impact (Python analyzer by Moudather Chelbi)",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:eco-python-code-analyzer.test"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "main": "./dist/extension.js",
+  "browser": "./dist/web/extension.js",
+  "files": [
+    "dist",
+    "eco_code_analyzer/**/*.py"
+  ],
+  "dependencies": {
+    "vscode": "^1.1.37"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "eco-python-code-analyzer.test",
+        "title": "Test Basic Extension Loading",
+        "category": "Eco Python"
+      }
+    ],
+    "configuration": {
+      "title": "Eco Python Code Analyzer",
+      "properties": {
+        "eco-python-code-analyzer.enableRealTimeAnalysis": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable real-time analysis of Python files"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "build": "npm run compile",
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run clean && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.96.0",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "esbuild": "^0.24.0",
+    "eslint": "^9.16.0",
+    "fs-extra": "^11.2.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.7.2"
+  }
+}
